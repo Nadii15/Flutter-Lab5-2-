@@ -8,8 +8,7 @@ class PhotoPage extends StatefulWidget {
   const PhotoPage({super.key});
 
   @override
-  State<PhotoPage> createState() =>
-      _PhotoPageState();
+  State<PhotoPage> createState() => _PhotoPageState();
 }
 
 class _PhotoPageState extends State<PhotoPage> {
@@ -33,14 +32,12 @@ class _PhotoPageState extends State<PhotoPage> {
     try {
       await Future.delayed(const Duration(seconds: 2));
 
-      final randomIndex = DateTime.now().microsecondsSinceEpoch %
-      _localPhotos.length;
-        _imageUrl =
-            _localPhotos[randomIndex];
-      
+      final randomIndex =
+          DateTime.now().microsecondsSinceEpoch %
+          _localPhotos.length;
+      _imageUrl = _localPhotos[randomIndex];
     } catch (e) {
-      _errorMessage =
-          'Ошибка загрузки фото';
+      _errorMessage = 'Ошибка загрузки фото';
     }
     setState(() {
       _isLoading = false;
@@ -67,6 +64,7 @@ class _PhotoPageState extends State<PhotoPage> {
       ),
     );
   }
+
   Widget _buildAnimalToggle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +85,8 @@ class _PhotoPageState extends State<PhotoPage> {
         const SizedBox(width: 12),
         ChoiceChip(
           label: const Text('Пейзаж'),
-          selected: _animalType == PhotoType.landscapes,
+          selected:
+              _animalType == PhotoType.landscapes,
           onSelected: (selected) {
             if (selected) {
               setState(() {
@@ -101,14 +100,17 @@ class _PhotoPageState extends State<PhotoPage> {
       ],
     );
   }
+
   Widget _buildContent() {
     if (_isLoading) {
-      return const  Expanded(
-        child: Center(child: CircularProgressIndicator()),
+      return const Expanded(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     }
 
-    if(_errorMessage != null) {
+    if (_errorMessage != null) {
       return Expanded(
         child: Center(
           child: Padding(
@@ -156,10 +158,11 @@ class _PhotoPageState extends State<PhotoPage> {
       ),
     );
   }
+
   Widget _buildButton() {
     String label = _animalType == PhotoType.dog
-    ? 'Новая собака'
-    : 'Новый пейзаж';
+        ? 'Новая собака'
+        : 'Новый пейзаж';
 
     return ElevatedButton(
       onPressed: _isLoading ? null : _fetchPhoto,
